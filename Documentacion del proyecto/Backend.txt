@@ -1,0 +1,8 @@
+        ** Notas del codigo al programar**
+
+23/04/2024: Ocurrio un error queno mostraba el mesaje del ""req.flash()", ni success, ni message
+era porque se estaba pasando como parametro dentro de la funcion "done()" que es para finalizar 
+la autenticacion por eso no lo mostraba y redirigia al signin de una ves.
+
+Solucion: Fue llamar las funciones "req.flash()" primero que la funcion "done()" y no como un parametro
+de la misma.
