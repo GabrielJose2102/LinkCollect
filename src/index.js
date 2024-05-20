@@ -47,8 +47,8 @@ pool.query(consulta, (error, result) =>{
         console.log('Error al verificar tablas de la DB');
         return;
     } else {
-              console.log(result[0])
-        if (result[0] === undefined /*|| result[0].Tables_in_database_links === 'sessions'*/) {
+              console.log(result[0].Tables_in_railway)
+        if (result[0] === undefined || result[0].Tables_in_railway === 'sessions') {
 
             pool.query(consulta2, (error, result) =>{
                 if (error) {
