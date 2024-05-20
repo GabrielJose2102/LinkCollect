@@ -6,10 +6,65 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const MYSQLStore = require('express-mysql-session')(session);
 const passport = require('passport');
-const {pool} = require('./database');
+const pool = require('./database');
 
 
 const {database} = require('./keys');
+
+
+//construccion de la base de datos
+
+const consulta = `
+
+    SHOW TABLES;
+`;
+
+const consulta2 = `
+
+    CREATE TABLE users (
+        id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+        username VARCHAR(255) NOT NULL,
+        password VARCHAR(255) NOT NULL,
+         fullname VARCHAR(255) NOT NULL
+    );
+
+    CREATE TABLE links (
+        id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+        titulo VARCHAR(150) NOT NULL,
+        url VARCHAR(255) NOT NULL,
+        description TEXT,
+        user_id INT(11),
+        create_at timestamp NOT NULL DEFAULT current_timestamp,
+        CONSTRAINT fk_user FOREIGN KEY (user_id) 
+         REFERENCES users (id) 
+         ON DELETE CASCADE
+    );
+`;
+
+pool.query(consulta, (error, result) =>{
+
+    if(error) {
+        console.log('Error al verificar tablas de la DB');
+        return;
+    } else {
+              console.log(result[0].Tables_in_database_links)
+        if (result[0] === undefined || result[0].Tables_in_database_links === 'sessions') {
+
+            pool.query(consulta2, (error, result) =>{
+                if (error) {
+                    console.log('No se ah podido crear las tablas para esta base de datos');
+                    return;
+                }
+                console.log('Creacion de Tablas exitosa');
+                return;
+            })
+
+        } else {
+            console.log('La DB contiene las Tablas establecidas');
+        }
+    }
+
+});
 
  // Inicializations
 const app = express();
