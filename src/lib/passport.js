@@ -6,7 +6,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const {promisify} = require('util');
 
 //importandi modulo de BD para usar los metodos del objeto pool
-const pool = require('../database2');
+const pool = require('../database');
 const helpers = require('../lib/helpers');
 
 const query = promisify(pool.query).bind(pool);
@@ -19,7 +19,6 @@ passport.use('local.signin', new LocalStrategy({
 }, async (req, username, password, done) => {
     
     const rows = await query('SELECT * FROM users WHERE username = ?', [username]);
-    console.log(req.body)
     if (rows.length > 0) {
         const user = rows[0];
         const validPassword = await helpers.matchPassword(password, user.password);

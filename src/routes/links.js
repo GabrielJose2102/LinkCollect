@@ -4,7 +4,7 @@ const router = express.Router();
 const {promisify} = require('util');
 
 //importando el archivo de la bd 
-const pool = require('../database2');
+const pool = require('../database');
 const {isLoggedIn} = require('../lib/auth');
 
 const query = promisify(pool.query).bind(pool);

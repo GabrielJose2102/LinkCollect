@@ -6,7 +6,7 @@ const {promisify} = require('util');
 
 //importando modulo passport
 const passport = require('passport');
-const pool = require('../database2');
+const pool = require('../database');
 
 const query = promisify(pool.query).bind(pool);
 
