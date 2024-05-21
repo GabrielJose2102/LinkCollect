@@ -16,12 +16,22 @@ const {database} = require('./keys');
 
 const consulta = `
 
-    DROP TABLE links;
+    SHOW TABLES;
 `;
 
 const consulta2 = `
 
-    SHOW TABLES;
+    CREATE TABLE links (
+        id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+        title VARCHAR(150) NOT NULL,
+        url VARCHAR(255) NOT NULL,
+        description TEXT,
+        user_id INT(11),
+        create_at timestamp NOT NULL DEFAULT current_timestamp,
+        CONSTRAINT fk_user FOREIGN KEY (user_id) 
+            REFERENCES users (id) 
+            ON DELETE CASCADE
+    );
 `;
 
 pool.query(consulta, (error, result) =>{
