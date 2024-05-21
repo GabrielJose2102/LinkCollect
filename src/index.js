@@ -16,12 +16,12 @@ const {database} = require('./keys');
 
 const consulta = `
 
-    SHOW TABLES;
+    DROP TABLE links;
 `;
 
 const consulta2 = `
 
-    DROP TABLE links;
+    SHOW TABLES;
 `;
 
 pool.query(consulta, (error, result) =>{
