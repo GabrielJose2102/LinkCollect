@@ -21,11 +21,16 @@ const consulta = `
 
 const consulta2 = `
 
-    CREATE TABLE users (
+    CREATE TABLE links (
         id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-        username VARCHAR(255) NOT NULL,
-        password VARCHAR(255) NOT NULL,
-         fullname VARCHAR(255) NOT NULL
+        titulo VARCHAR(150) NOT NULL,
+        url VARCHAR(255) NOT NULL,
+        description TEXT,
+        user_id INT(11),
+        create_at timestamp NOT NULL DEFAULT current_timestamp,
+        CONSTRAINT fk_user FOREIGN KEY (user_id) 
+            REFERENCES users (id) 
+            ON DELETE CASCADE
     );
 `;
 
