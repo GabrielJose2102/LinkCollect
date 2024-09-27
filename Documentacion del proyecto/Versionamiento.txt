@@ -1,6 +1,0 @@
-    ** Versionamiento del App **
-
-20/04/2024 Primer commit:  se realizo el commit con las primeras funcionalidades
-desarrolladas de la app donde se contaba con los modulos de (Add, List),
-tambien con los botones de (Delete, Edit) con sus funcinabilidad ya desarrollada 
-
